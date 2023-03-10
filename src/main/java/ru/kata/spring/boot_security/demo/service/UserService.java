@@ -1,71 +1,16 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.dao.UserRepository;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@Transactional
-public class UserService {
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userDao) {
-        this.userRepository = userDao;
-    }
-
-    @Transactional(readOnly = true)
-    public User getUserByUsername(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Transactional
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
-
-    @Transactional(readOnly = true)
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
-
-    @Transactional
-    public void adminRedactor(User user, Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            User editUser = optionalUser.get();
-            editUser.setId(user.getId());
-            editUser.setFirstName(user.getFirstName());
-            editUser.setLastName(user.getLastName());
-            editUser.setEmail(user.getEmail());
-            editUser.setPassword(user.getPassword());
-            userRepository.save(user);
-        }
-    }
-
-    @Transactional
-    public void userRedactor(User user, Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            User editUser = optionalUser.get();
-            editUser.setFirstName(user.getFirstName());
-            editUser.setLastName(user.getLastName());
-            editUser.setEmail(user.getEmail());
-            editUser.setPassword(user.getPassword());
-            userRepository.save(user);
-        }
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        userRepository.delete(userRepository.getById(id));
-    }
+public interface UserService extends UserDetailsService {
+    User findByEmail(String email);
+    void saveUser(User user);
+    List<User> getAllUsers();
+    Optional<User> getUserById(Long id);
+    void adminRedactor(User user, Long id);
+    public void userRedactor(User user, Long id);
 }
