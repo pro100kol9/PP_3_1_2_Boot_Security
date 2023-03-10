@@ -6,15 +6,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
+import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/guest")
 public class GuestController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
+    private final RoleService roleService;
 
-    public GuestController(UserServiceImpl userService) {
+    public GuestController(UserServiceImpl userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/login")
@@ -29,6 +35,7 @@ public class GuestController {
 
     @PostMapping("/registration")
     public String registrationPost(@ModelAttribute("newuser") User user) {
+        user.setRoles(Arrays.asList(roleService.findByRoleName("ROLE_USER")));
         userService.saveUser(user);
         return "redirect:/guest/login";
     }
