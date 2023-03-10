@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User findByEmailWithRoles(String email) {
+        return userRepository.findByEmailWithRoles(email);
     }
 
     @Transactional
@@ -73,10 +73,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = findByEmail(email);
+        User user = findByEmailWithRoles(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         return user;
     }
+
 }
