@@ -18,6 +18,11 @@
     <input type="email" th:name="email" th:value="${user.email}" required/><br/>
     <label>Password:</label>
     <input type="password" th:name="password" th:value="${user.password}" required/><br/>
+    <label>Role:</label>
+    <div th:each="role : ${allRoles}">
+        <input type="checkbox" th:name="roles" th:value="${role.id}" th:checked="${user.roles.contains(role)}">
+        <span th:text="${role.roleName}"></span>
+    </div>
     <button type="submit">Save</button>
 </form>
 </body>

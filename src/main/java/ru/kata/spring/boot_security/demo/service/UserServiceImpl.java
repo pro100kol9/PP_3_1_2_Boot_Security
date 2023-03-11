@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
             editUser.setLastName(user.getLastName());
             editUser.setEmail(user.getEmail());
             editUser.setPassword(user.getPassword());
+            editUser.setRoles(user.getRoles());
             userRepository.save(user);
         }
     }
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
             editUser.setLastName(user.getLastName());
             editUser.setEmail(user.getEmail());
             editUser.setPassword(user.getPassword());
+            editUser.setRoles(user.getRoles());
             userRepository.save(user);
         }
     }

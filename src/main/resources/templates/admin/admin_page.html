@@ -9,6 +9,7 @@
 <table>
     <thead>
     <tr>
+        <th>Role</th>
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -19,6 +20,7 @@
     </thead>
     <tbody>
     <tr th:each="user : ${users}">
+        <td th:text="${user.roles}"></td>
         <td th:text="${user.id}"></td>
         <td th:text="${user.firstName}"></td>
         <td th:text="${user.lastName}"></td>

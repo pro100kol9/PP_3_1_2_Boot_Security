@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/guest/login")
                 .loginProcessingUrl("/guest/login/check")
-                .defaultSuccessUrl("/user/page", true)
+                .successHandler(new CustomAuthenticationSuccessHandler())
                 .failureUrl("/guest/login?error")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/guest/login")

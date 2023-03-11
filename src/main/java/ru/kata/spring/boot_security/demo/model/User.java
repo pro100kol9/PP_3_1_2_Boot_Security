@@ -93,9 +93,9 @@ public class User implements UserDetails {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

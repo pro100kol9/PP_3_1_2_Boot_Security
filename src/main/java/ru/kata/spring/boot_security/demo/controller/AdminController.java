@@ -4,15 +4,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserServiceImpl userService;
+    private final RoleService roleService;
 
-    public AdminController(UserServiceImpl userService) {
+    public AdminController(UserServiceImpl userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/page")
@@ -22,7 +25,8 @@ public class AdminController {
     }
 
     @GetMapping("/redactor/{id}")
-    public String getAdminRedactor(Model user, @PathVariable("id") Long id) {
+    public String getAdminRedactor(Model user, Model roles, @PathVariable("id") Long id) {
+        roles.addAttribute("allRoles", roleService.findAll());
         user.addAttribute("user",userService.getUserById(id).get());
         return "/admin/admin_redactor";
     }

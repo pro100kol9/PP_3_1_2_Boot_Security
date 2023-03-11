@@ -12,8 +12,8 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-        <th>Edit</th>
-        <th>Delete</th>
+<!--        <th>Edit</th>-->
+<!--        <th>Delete</th>-->
     </tr>
     </thead>
     <tbody>
@@ -21,15 +21,15 @@
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.email}"></td>
         <td>
-            <form th:action="@{/user/redactor/{id}(id=${user.id})}" method="get">
-                <button type="submit">Edit</button>
-            </form>
+<!--            <form th:action="@{/user/redactor/{id}(id=${user.id})}" method="get">-->
+<!--                <button type="submit">Edit</button>-->
+<!--            </form>-->
         </td>
         <td>
-            <form th:action="@{/user/delete/{id}(id=${user.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this user?')">
-                <input type="hidden" name="_method" value="DELETE"/>
-                <button type="submit">Delete</button>
-            </form>
+<!--            <form th:action="@{/user/delete/{id}(id=${user.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this user?')">-->
+<!--                <input type="hidden" name="_method" value="DELETE"/>-->
+<!--                <button type="submit">Delete</button>-->
+<!--            </form>-->
         </td>
     </tbody>
 </table>
