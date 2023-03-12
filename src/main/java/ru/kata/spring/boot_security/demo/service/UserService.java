@@ -8,9 +8,14 @@ import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
     User findByEmailWithRoles(String email);
+
     void saveUser(User user);
+
     List<User> getAllUsers();
+
     Optional<User> getUserById(Long id);
+
     void adminRedactor(User user, Long id);
-    public void userRedactor(User user, Long id);
+
+    void userRedactor(User user, Long id);
 }

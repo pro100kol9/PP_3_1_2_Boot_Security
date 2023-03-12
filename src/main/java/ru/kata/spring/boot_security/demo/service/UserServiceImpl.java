@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void saveUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -48,9 +50,11 @@ public class UserServiceImpl implements UserService {
             editUser.setFirstName(user.getFirstName());
             editUser.setLastName(user.getLastName());
             editUser.setEmail(user.getEmail());
-            editUser.setPassword(user.getPassword());
             editUser.setRoles(user.getRoles());
-            userRepository.save(user);
+            if (!editUser.getPassword().equals(user.getPassword())) {
+                editUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            }
+            userRepository.save(editUser);
         }
     }
 
@@ -62,12 +66,13 @@ public class UserServiceImpl implements UserService {
             editUser.setFirstName(user.getFirstName());
             editUser.setLastName(user.getLastName());
             editUser.setEmail(user.getEmail());
-            editUser.setPassword(user.getPassword());
-            editUser.setRoles(user.getRoles());
-            userRepository.save(user);
+            if (!editUser.getPassword().equals(user.getPassword())) {
+                editUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            }
+            userRepository.save(editUser);
         }
     }
-    
+
     @Transactional
     public void delete(Long id) {
         userRepository.delete(userRepository.getById(id));
