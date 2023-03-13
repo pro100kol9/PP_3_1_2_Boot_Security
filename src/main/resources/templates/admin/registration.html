@@ -5,7 +5,7 @@
     <title>Registration</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/guest/registration}" th:object="${newuser}">
+<form th:method="POST" th:action="@{/admin/registration}" th:object="${newuser}">
     <label for="email">email: </label>
     <input type="email" th:field="*{email}" id="email" required/>
     <br/>
@@ -18,7 +18,13 @@
     <label for="password">password: </label>
     <input type="password" th:field="*{password}" id="password" required/>
     <br/>
+    <label>Role:</label>
+    <div th:each="role : ${allRoles}">
+        <input type="checkbox" th:name="roles" th:value="${role.id}">
+        <span th:text="${role.roleName}"></span>
+    </div>
     <input type="submit" value="Sign up!"/>
 </form>
 </body>
 </html>
+

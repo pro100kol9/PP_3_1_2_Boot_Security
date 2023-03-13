@@ -40,8 +40,13 @@
     </tbody>
 </table>
 <br>
+<form th:action="@{/admin/registration}" method="get">
+    <button type="submit">New User</button>
+</form>
+<br>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout"/>
 </form>
 </body>
 </html>
+

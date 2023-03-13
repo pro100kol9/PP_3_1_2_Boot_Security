@@ -43,4 +43,16 @@ public class AdminController {
         userService.delete(id);
         return "redirect:/admin/page";
     }
+
+    @GetMapping("/registration")
+    public String registrationGet(@ModelAttribute("newuser") User user, Model roles) {
+        roles.addAttribute("allRoles", roleService.findAll());
+        return "/admin/registration";
+    }
+
+    @PostMapping("/registration")
+    public String registrationPost(@ModelAttribute("newuser") User user) {
+        userService.saveUser(user);
+        return "redirect:/admin/page";
+    }
 }
