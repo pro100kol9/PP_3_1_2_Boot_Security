@@ -29,8 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/redactor/{id}")
-    public String getUserRedactor(Model user, Model roles, @PathVariable("id") Long id) {
-        roles.addAttribute("allRoles", roleService.findAll());
+    public String getUserRedactor(Model user, @PathVariable("id") Long id) {
         user.addAttribute("user", userService.getUserById(id).get());
         return "/user/user_redactor";
     }

@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +12,11 @@ import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 public class AdminController {
     private final UserServiceImpl userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
 
 
-    public AdminController(UserServiceImpl userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserServiceImpl userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/page")
